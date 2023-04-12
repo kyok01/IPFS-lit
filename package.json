@@ -47,6 +47,6 @@
   },
   "devDependencies": {
     "ipfs-http-client": "^53.0.1",
-    "lit-js-sdk": "^1.1.250"
+    "lit-js-sdk": "^1.1.182"
   }
 }
