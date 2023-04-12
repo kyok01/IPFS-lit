@@ -1,7 +1,7 @@
 import * as LitJsSdk from "lit-js-sdk";
 
 const client = new LitJsSdk.LitNodeClient()
-const chain = 'ethereum'
+const chain = 'goerli'
 
 /** 
  * Access control for a wallet with > 0.00001 ETH
@@ -26,7 +26,7 @@ const chain = 'ethereum'
 // Must hold at least one Monster Suit NFT (https://opensea.io/collection/monster-suit)
 const accessControlConditionsNFT = [
     {
-      contractAddress: '0x89b597199dac806ceecfc091e56044d34e59985c',
+      contractAddress: '0x75b59f23cdc529c92fb80f7520a92b05f37fe49c',
       standardContractType: 'ERC721',
       chain,
       method: 'balanceOf',

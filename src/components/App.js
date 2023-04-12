@@ -1,24 +1,11 @@
 import "./App.css";
 import { useState } from "react";
-import { create } from "ipfs-http-client";
 import lit from "../lib/lit";
 import Header from "./Header";
+import { NFTStorage } from 'nft.storage/dist/bundle.esm.min.js'
 
-const projectId = '';   // <---------- your Infura Project ID
+const client = new NFTStorage({ token: process.env.REACT_APP_NFT_STORAGE_KEY })
 
-const projectSecret = '';  // <---------- your Infura Secret
-// (for security concerns, consider saving these values in .env files)
-
-const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
-
-const client = create({
-    host: 'ipfs.infura.io',
-    port: 5001,
-    protocol: 'https',
-    headers: {
-        authorization: auth,
-    },
-});
 
 function App() {
   const [file, setFile] = useState(null);
@@ -54,11 +41,14 @@ function App() {
     e.preventDefault();
 
     try {
-      const created = await client.add(file);
-      const url = `https://infura-ipfs.io/ipfs/${created.path}`;
+      console.log('aaa');
+      const data = 'Hello nft.storage!'
+      const metadata = await client.storeBlob(new Blob([data]));
+      console.log(metadata);
+      console.log('bbb');
 
-      const encrypted = await lit.encryptString(url);
-      console.log('IPFS URL: ', url);
+      const encrypted = await lit.encryptString(metadata);
+      console.log('IPFS URL: ', metadata);
       console.log('Encrypted String: ', encrypted.encryptedFile);
 
       setEncryptedUrlArr((prev) => [...prev, encrypted.encryptedFile]);
